@@ -1,6 +1,8 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 public class Game {
@@ -9,7 +11,9 @@ public class Game {
     private final PenaltyBox penaltyBox;
     ArrayList players = new ArrayList();
     int[] places = new int[MAX_NUMBER_OF_PLAYERS];
-    int[] purses = new int[MAX_NUMBER_OF_PLAYERS];
+
+    private Map<Integer, Integer> playersPurses = new HashMap<>();
+
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -22,10 +26,10 @@ public class Game {
 
     public boolean add(String playerName) {
 
+        playersPurses.put(howManyPlayers(), 0);
 
         players.add(playerName);
         places[howManyPlayers()] = 0;
-        purses[howManyPlayers()] = 0;
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
@@ -100,10 +104,14 @@ public class Game {
 
     private void increasePurses(String message) {
         System.out.println(message);
-        purses[currentPlayer]++;
+
+        Integer points = playersPurses.get(currentPlayer);
+        points++;
+        playersPurses.put(currentPlayer, points);
+
         System.out.println(players.get(currentPlayer)
                 + " now has "
-                + purses[currentPlayer]
+                + points //purses[currentPlayer]
                 + " Gold Coins.");
     }
 
@@ -118,6 +126,6 @@ public class Game {
 
 
     private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == MAX_PURSE_NUMBER);
+        return !(playersPurses.get(currentPlayer).equals(MAX_PURSE_NUMBER));
     }
 }
