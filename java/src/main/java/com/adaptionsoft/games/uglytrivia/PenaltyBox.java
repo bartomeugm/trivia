@@ -1,18 +1,21 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 public class PenaltyBox {
-    private final boolean[] inPenaltyBox;
+    private Map<Integer, Boolean> playersInPenaltyBox = new HashMap<>();
+
     private Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox;
 
-    public PenaltyBox(int maxNumberOfPlayers, Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox) {
-        this.inPenaltyBox = new boolean[maxNumberOfPlayers];
+    public PenaltyBox(Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox) {
         this.ruleForGoingOutOfThePenaltyBox = ruleForGoingOutOfThePenaltyBox;
     }
 
     boolean isInPenaltyBox(int currentPlayer) {
-        return inPenaltyBox[currentPlayer];
+        return playersInPenaltyBox.containsKey(currentPlayer)
+                && playersInPenaltyBox.get(currentPlayer);
     }
 
     boolean isGettingOutOfPenaltyBox(int roll) {
@@ -20,6 +23,6 @@ public class PenaltyBox {
     }
 
     void sendToPenaltyBox(int currentPlayer) {
-        inPenaltyBox[currentPlayer] = true;
+        playersInPenaltyBox.put(currentPlayer, true);
     }
 }

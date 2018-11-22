@@ -17,7 +17,7 @@ public class Game {
 
     public Game(QuestionDeck aQuestionDeck, Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox) {
         questionDeck = aQuestionDeck;
-        penaltyBox = new PenaltyBox(MAX_NUMBER_OF_PLAYERS, ruleForGoingOutOfThePenaltyBox);
+        penaltyBox = new PenaltyBox(ruleForGoingOutOfThePenaltyBox);
     }
 
     public boolean add(String playerName) {

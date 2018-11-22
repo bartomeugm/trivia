@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PenaltyBoxTest {
 
-    private final int MAX_NUMBER_OF_PLAYERS = 6;
     private Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox;
 
     @BeforeEach
@@ -22,7 +21,7 @@ public class PenaltyBoxTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4, 5})
     void player_should_not_be_in_penalty_box(int currentPlayer) {
-        PenaltyBox penaltyBox = new PenaltyBox(MAX_NUMBER_OF_PLAYERS, ruleForGoingOutOfThePenaltyBox);
+        PenaltyBox penaltyBox = new PenaltyBox(ruleForGoingOutOfThePenaltyBox);
 
         assertFalse(penaltyBox.isInPenaltyBox(currentPlayer));
     }
@@ -30,7 +29,7 @@ public class PenaltyBoxTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 3, 4, 5})
     void player_should_be_sent_to_penalty_box(int currentPlayer) {
-        PenaltyBox penaltyBox = new PenaltyBox(MAX_NUMBER_OF_PLAYERS, ruleForGoingOutOfThePenaltyBox);
+        PenaltyBox penaltyBox = new PenaltyBox(ruleForGoingOutOfThePenaltyBox);
 
         penaltyBox.sendToPenaltyBox(currentPlayer);
 
@@ -43,7 +42,7 @@ public class PenaltyBoxTest {
             "5, true", "6, false"})
     void gets_out_of_penalty_box_if_odd_number_is_rolled(int roll, boolean expected) {
         ruleForGoingOutOfThePenaltyBox = this::isOdd;
-        PenaltyBox penaltyBox = new PenaltyBox(MAX_NUMBER_OF_PLAYERS, ruleForGoingOutOfThePenaltyBox);
+        PenaltyBox penaltyBox = new PenaltyBox(ruleForGoingOutOfThePenaltyBox);
 
         boolean actual = penaltyBox.isGettingOutOfPenaltyBox(roll);
 
