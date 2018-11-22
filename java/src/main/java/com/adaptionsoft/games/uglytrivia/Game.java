@@ -77,40 +77,35 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (penaltyBox.isInPenaltyBox(currentPlayer)) {
             if (isGettingOutOfPenaltyBox) {
-                System.out.println("Answer was correct!!!!");
-                purses[currentPlayer]++;
-                System.out.println(players.get(currentPlayer)
-                        + " now has "
-                        + purses[currentPlayer]
-                        + " Gold Coins.");
+                increasePurses("Answer was correct!!!!");
 
                 boolean winner = didPlayerWin();
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
-
+                setTurnToNextPlayer();
                 return winner;
             } else {
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
+                setTurnToNextPlayer();
                 return true;
             }
-
-
         } else {
-
-            System.out.println("Answer was corrent!!!!");
-            purses[currentPlayer]++;
-            System.out.println(players.get(currentPlayer)
-                    + " now has "
-                    + purses[currentPlayer]
-                    + " Gold Coins.");
-
+            increasePurses("Answer was corrent!!!!");
             boolean winner = didPlayerWin();
-            currentPlayer++;
-            if (currentPlayer == players.size()) currentPlayer = 0;
-
+            setTurnToNextPlayer();
             return winner;
         }
+    }
+
+    private void setTurnToNextPlayer() {
+        currentPlayer++;
+        if (currentPlayer == players.size()) currentPlayer = 0;
+    }
+
+    private void increasePurses(String message) {
+        System.out.println(message);
+        purses[currentPlayer]++;
+        System.out.println(players.get(currentPlayer)
+                + " now has "
+                + purses[currentPlayer]
+                + " Gold Coins.");
     }
 
     public boolean wrongAnswer() {
@@ -118,8 +113,7 @@ public class Game {
         System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
         penaltyBox.sendToPenaltyBox(currentPlayer);
 
-        currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
+        setTurnToNextPlayer();
         return true;
     }
 
