@@ -20,7 +20,7 @@ public class GoldenMasterSpike {
     @Test
     public void run() throws IOException {
         Path output = Paths.get("output.log");
-        Path goldenMaster = Paths.get("golden-master.log");
+        Path goldenMaster = Paths.get("golden-master-for-even-numbers.log");
 
         PrintStream originalOut = System.out;
 
@@ -28,7 +28,7 @@ public class GoldenMasterSpike {
 
             System.setOut(printStream);
 
-            IntStream.range(0, 1000).forEach( i -> new GameRunner().run(new Random(i)));
+            IntStream.range(0, 1000).forEach(i -> new GameRunner().run(new Random(i)));
 
             assertThat(Files.readAllLines(output), is(Files.readAllLines(goldenMaster)));
         } finally {

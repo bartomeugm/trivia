@@ -43,7 +43,9 @@ public class PenaltyBoxTest {
     void gets_out_of_penalty_box_if_odd_number_is_rolled(int roll, boolean expected) {
         ruleForGoingOutOfThePenaltyBox = this::isOdd;
         PenaltyBox penaltyBox = new PenaltyBox(new boolean[6], ruleForGoingOutOfThePenaltyBox);
+
         boolean actual = penaltyBox.isGettingOutOfPenaltyBox(roll);
+
         assertEquals(expected, actual);
     }
 

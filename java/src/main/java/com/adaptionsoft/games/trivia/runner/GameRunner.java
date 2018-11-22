@@ -32,7 +32,7 @@ public class GameRunner {
         IntStream.range(0, 50).forEach(i ->
                 categories.forEach(category -> category.addQuestion(format("%s Question %d", category.name(), i))));
 
-        Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox = (roll) -> roll % 2 != 0;
+        Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox = (roll) -> roll % 2 == 0;
         Game aGame = new Game(new QuestionDeck(categories), ruleForGoingOutOfThePenaltyBox);
 
         aGame.add("Chet");
