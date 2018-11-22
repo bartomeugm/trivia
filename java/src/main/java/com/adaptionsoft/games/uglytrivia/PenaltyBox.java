@@ -14,4 +14,8 @@ public class PenaltyBox {
     boolean isGettingOutOfPenaltyBox(int roll) {
         return roll % 2 == 0;
     }
+
+    void sendToPenaltyBox(int currentPlayer) {
+        inPenaltyBox[currentPlayer] = true;
+    }
 }
