@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.function.Function;
 
 public class Game {
+    private static final int MAX_NUMBER_OF_PLAYERS = 6;
+    private static final int MAX_PURSE_NUMBER = 6;
     private final PenaltyBox penaltyBox;
     ArrayList players = new ArrayList();
-    int[] places = new int[6];
-    int[] purses = new int[6];
+    int[] places = new int[MAX_NUMBER_OF_PLAYERS];
+    int[] purses = new int[MAX_NUMBER_OF_PLAYERS];
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -15,11 +17,7 @@ public class Game {
 
     public Game(QuestionDeck aQuestionDeck, Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox) {
         questionDeck = aQuestionDeck;
-        penaltyBox = new PenaltyBox(new boolean[6], ruleForGoingOutOfThePenaltyBox);
-    }
-
-    public boolean isPlayable() {
-        return (howManyPlayers() >= 2);
+        penaltyBox = new PenaltyBox(new boolean[MAX_NUMBER_OF_PLAYERS], ruleForGoingOutOfThePenaltyBox);
     }
 
     public boolean add(String playerName) {
@@ -120,6 +118,6 @@ public class Game {
 
 
     private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == 6);
+        return !(purses[currentPlayer] == MAX_PURSE_NUMBER);
     }
 }
