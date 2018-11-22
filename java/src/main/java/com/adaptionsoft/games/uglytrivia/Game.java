@@ -41,7 +41,7 @@ public class Game {
         System.out.println(players.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (penaltyBox.isInPenaltyBox(currentPlayer) && penaltyBox.isGettingOutOfPenaltyBox(roll)) {
+        if (penaltyBox.isInPenaltyBox(currentPlayer) && !penaltyBox.isGettingOutOfPenaltyBox(roll)) {
             System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
             return;
