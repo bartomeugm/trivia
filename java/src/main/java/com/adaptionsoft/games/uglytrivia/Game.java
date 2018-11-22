@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class Game {
     private final PenaltyBox penaltyBox;
@@ -12,9 +13,9 @@ public class Game {
     boolean isGettingOutOfPenaltyBox;
     private final QuestionDeck questionDeck;
 
-    public Game(QuestionDeck aQuestionDeck) {
+    public Game(QuestionDeck aQuestionDeck, Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox) {
         questionDeck = aQuestionDeck;
-        penaltyBox = new PenaltyBox(new boolean[6]);
+        penaltyBox = new PenaltyBox(new boolean[6], ruleForGoingOutOfThePenaltyBox);
     }
 
     public boolean isPlayable() {
