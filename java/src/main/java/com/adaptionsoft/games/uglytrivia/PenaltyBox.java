@@ -6,8 +6,8 @@ public class PenaltyBox {
     private final boolean[] inPenaltyBox;
     private Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox;
 
-    public PenaltyBox(boolean[] inPenaltyBox, Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox) {
-        this.inPenaltyBox = inPenaltyBox;
+    public PenaltyBox(int maxNumberOfPlayers, Function<Integer, Boolean> ruleForGoingOutOfThePenaltyBox) {
+        this.inPenaltyBox = new boolean[maxNumberOfPlayers];
         this.ruleForGoingOutOfThePenaltyBox = ruleForGoingOutOfThePenaltyBox;
     }
 
