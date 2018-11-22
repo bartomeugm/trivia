@@ -3,6 +3,7 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.ArrayList;
 
 public class Game {
+    private final PenaltyBox penaltyBox;
     ArrayList players = new ArrayList();
     int[] places = new int[6];
     int[] purses = new int[6];
@@ -14,6 +15,7 @@ public class Game {
 
     public Game(QuestionDeck aQuestionDeck) {
         questionDeck = aQuestionDeck;
+        penaltyBox = new PenaltyBox(inPenaltyBox);
     }
 
     public boolean isPlayable() {
@@ -41,22 +43,18 @@ public class Game {
         System.out.println(players.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (isInPenaltyBox(currentPlayer) && roll % 2 == 0) {
+        if (penaltyBox.isInPenaltyBox(currentPlayer) && penaltyBox.isGettingOutOfPenaltyBox(roll)) {
             System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
             return;
         }
-        if (isInPenaltyBox(currentPlayer)) {
+        if (penaltyBox.isInPenaltyBox(currentPlayer)) {
             isGettingOutOfPenaltyBox = true;
 
             System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
         }
         movePlayer(roll);
         askQuestion();
-    }
-
-    private boolean isInPenaltyBox(int currentPlayer) {
-        return inPenaltyBox[currentPlayer];
     }
 
     private void movePlayer(int positions) {
@@ -79,7 +77,7 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (isInPenaltyBox(currentPlayer)) {
+        if (penaltyBox.isInPenaltyBox(currentPlayer)) {
             if (isGettingOutOfPenaltyBox) {
                 System.out.println("Answer was correct!!!!");
                 purses[currentPlayer]++;
