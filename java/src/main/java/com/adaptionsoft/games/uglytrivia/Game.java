@@ -7,7 +7,6 @@ public class Game {
     ArrayList players = new ArrayList();
     int[] places = new int[6];
     int[] purses = new int[6];
-    boolean[] inPenaltyBox = new boolean[6];
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -15,7 +14,7 @@ public class Game {
 
     public Game(QuestionDeck aQuestionDeck) {
         questionDeck = aQuestionDeck;
-        penaltyBox = new PenaltyBox(inPenaltyBox);
+        penaltyBox = new PenaltyBox(new boolean[6]);
     }
 
     public boolean isPlayable() {
@@ -28,7 +27,6 @@ public class Game {
         players.add(playerName);
         places[howManyPlayers()] = 0;
         purses[howManyPlayers()] = 0;
-        inPenaltyBox[howManyPlayers()] = false;
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
